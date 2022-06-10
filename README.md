@@ -10,3 +10,5 @@ Deberemos colocar un numero en el input y, al apretar el botón, deberá renderi
 🚨 Si no coincide con ningún id, renderizar un mensaje de error.
 
 🆙 Antes de entregar, debemos deployar nuestro repositorio en Vercel, y entregar ambos links. (GitHub y Vercel). 
+
+![diagrama](https://user-images.githubusercontent.com/63797901/173150371-f800e942-0653-46c7-8a81-70c75005205e.png)
