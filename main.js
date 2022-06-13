@@ -136,7 +136,7 @@ const crearCard = (pizza) => {
 	// Agregar el evento para eliminar toda la card
 	img.addEventListener("click", () => {
 		card.remove();
-		eliminarFavorito(pizza);
+		// eliminarFavorito(pizza);
 	});
 
 	// Crar la imagen de la card

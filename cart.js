@@ -4,6 +4,7 @@ window.addEventListener("load", () => {
   mostrarPizzasFavoritas();
 });
 
+
 const mostrarPizzasFavoritas = () => {
 	let pizzasFavoritasCard = JSON.parse(localStorage.getItem("pizzaFavorita"));
 	pizzasFavoritasCard.forEach((pizza) => {
@@ -11,6 +12,22 @@ const mostrarPizzasFavoritas = () => {
 	});
 };
 
+// Eliminar pizza de favoritos
+const eliminarFavorito = (pizza) => {
+	let favoritosLocal = JSON.parse(localStorage.getItem("pizzaFavorita"));
+	console.log(favoritosLocal);
+
+	// Filtrar por pizza eliminada
+	let pizzaEliminada = favoritosLocal.filter((elem) => elem.id !== pizza.id);
+	console.log(pizzaEliminada);
+	// carrito.innerHTML = pizzaEliminada.length;
+
+	// Guardar array al localStorage
+  localStorage.setItem("pizzaFavorita", JSON.stringify(pizzaEliminada));
+  // Eliminar card
+  const card = document.querySelector(`[data-id="${pizza.id}"]`);
+  card.remove();
+};
 
 const crearCard = (pizza) => {
 
@@ -18,7 +35,17 @@ const crearCard = (pizza) => {
 	const card = document.createElement("div");
 	card.classList.add("card");
 	card.setAttribute("data-id", pizza.id);
-	container.appendChild(card);
+  container.appendChild(card);
+  
+  	// Crear la imagen cerrar
+	const img = document.createElement("img");
+	img.classList.add("close");
+	img.src = "./assets/img/close.png";
+	card.appendChild(img);
+	// Agregar el evento para eliminar toda la card
+	img.addEventListener("click", () => {
+		eliminarFavorito(pizza);
+	});
 
 	// Crar la imagen de la card
 	const cardImg = document.createElement("img");
