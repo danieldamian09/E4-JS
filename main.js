@@ -2,9 +2,8 @@
 const formulario = document.querySelector("#form-data");
 const idPizza = document.querySelector("#idPizza");
 const container = document.querySelector(".card-container");
-const carrito =  document.querySelector(".amount");
+const carrito = document.querySelector(".amount");
 let favoritos = [];
-
 
 // Data de la pizza
 const pizzas = [
@@ -62,23 +61,19 @@ window.addEventListener("load", () => {
 	localStorage.setItem("pizzas", JSON.stringify(pizzas));
 	// localStorage.setItem("favoritos", JSON.stringify(favoritos));
 	// Cantidad que esta en el carrito
-	
 });
 
-
 document.addEventListener("DOMContentLoaded", () => {
-	// Obtener las pizzas favoritas 
+	// Obtener las pizzas favoritas
 	let pizzasFavoritasCart = JSON.parse(localStorage.getItem("pizzaFavorita"));
 	// console.log(pizzasFavoritasCart);
 	if (pizzasFavoritasCart) {
 		carrito.innerHTML = pizzasFavoritasCart.length;
 		mostrarPizzasFavoritas();
-	}else{
+	} else {
 		carrito.innerHTML = 0;
 	}
-
 });
-
 
 // Mostrar las pizzas del carrito guardadas en localStorage
 const mostrarPizzasFavoritas = () => {
@@ -86,7 +81,7 @@ const mostrarPizzasFavoritas = () => {
 	pizzasFavoritasCard.forEach((pizza) => {
 		crearCard(pizza);
 	});
-}
+};
 
 // Agregar pizza a favoritos
 const agregarFavorito = (pizza) => {
@@ -94,7 +89,7 @@ const agregarFavorito = (pizza) => {
 	carrito.innerHTML = favoritos.length;
 	localStorage.setItem("pizzaFavorita", JSON.stringify(favoritos));
 	alert("Pizza agregada al carrito");
-}
+};
 
 // Eliminar pizza de favoritos
 const eliminarFavorito = (pizza) => {
@@ -102,22 +97,27 @@ const eliminarFavorito = (pizza) => {
 	console.log(favoritosLocal);
 
 	// Filtrar por pizza eliminada
-	let pizzaEliminada = favoritosLocal.filter((elem) => (elem.id !== pizza.id));
+	let pizzaEliminada = favoritosLocal.filter((elem) => elem.id !== pizza.id);
 	console.log(pizzaEliminada);
 	carrito.innerHTML = pizzaEliminada.length;
 
 	// Guardar array al localStorage
 	localStorage.setItem("pizzaFavorita", JSON.stringify(pizzaEliminada));
-}
-
-
+};
 
 // Crear Card Pizzas
 const crearCard = (pizza) => {
+	// Validar si la pizza ya esta creada
+	let pizzaCreada = document.querySelector(`[data-id="${pizza.id}"]`);
+	if (pizzaCreada) {
+		alert("Pizza ya creada");
+		return;
+	}
+
 	// Crear la card
 	const card = document.createElement("div");
 	card.classList.add("card");
-	card.setAttribute("id", pizza.id);
+	card.setAttribute("data-id", pizza.id);
 	container.appendChild(card);
 
 	// Crear la imagen cerrar
@@ -186,7 +186,7 @@ const crearCard = (pizza) => {
 	// Agregar el evento al boton
 	cardBtn.addEventListener("click", () => {
 		agregarFavorito(pizza);
-	})
+	});
 };
 
 formulario.addEventListener("submit", (e) => {
@@ -215,15 +215,10 @@ formulario.addEventListener("submit", (e) => {
 		return;
 	}
 
-
-
 	// Mostrar la pizza en la card
 	console.log(pizzaByID);
 	crearCard(pizzaByID);
 
 	// Limpiar el formulario
 	formulario.reset();
-
 });
-
-
