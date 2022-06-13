@@ -224,7 +224,7 @@ formulario.addEventListener("submit", (e) => {
 	}
 
 	// Mostrar la pizza en la card
-	console.log(pizzaByID);
+	// console.log(pizzaByID);
 	crearCard(pizzaByID);
 
 	// Limpiar el formulario

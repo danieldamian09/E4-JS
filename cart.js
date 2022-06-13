@@ -15,11 +15,11 @@ const mostrarPizzasFavoritas = () => {
 // Eliminar pizza de favoritos
 const eliminarFavorito = (pizza) => {
 	let favoritosLocal = JSON.parse(localStorage.getItem("pizzaFavorita"));
-	console.log(favoritosLocal);
+	// console.log(favoritosLocal);
 
 	// Filtrar por pizza eliminada
 	let pizzaEliminada = favoritosLocal.filter((elem) => elem.id !== pizza.id);
-	console.log(pizzaEliminada);
+	// console.log(pizzaEliminada);
 	// carrito.innerHTML = pizzaEliminada.length;
 
 	// Guardar array al localStorage
