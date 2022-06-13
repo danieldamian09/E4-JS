@@ -94,8 +94,9 @@ main {
 	border-radius: 22px;
 	height: auto;
 	margin: 0 auto 15px;
-	width: 300px;
+	max-width: 300px;
   position: relative;
+  width: 100%;
 }
 
 .close{
