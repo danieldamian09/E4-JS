@@ -5,6 +5,7 @@ const container = document.querySelector(".card-container");
 const carrito = document.querySelector(".amount");
 let favoritos = [];
 
+
 // Data de la pizza
 const pizzas = [
 	{
@@ -69,26 +70,33 @@ document.addEventListener("DOMContentLoaded", () => {
 	// console.log(pizzasFavoritasCart);
 	if (pizzasFavoritasCart) {
 		carrito.innerHTML = pizzasFavoritasCart.length;
-		mostrarPizzasFavoritas();
-	} else {
-		carrito.innerHTML = 0;
-	}
+		// mostrarPizzasFavoritas();
+	} 
 });
 
 // Mostrar las pizzas del carrito guardadas en localStorage
-const mostrarPizzasFavoritas = () => {
-	let pizzasFavoritasCard = JSON.parse(localStorage.getItem("pizzaFavorita"));
-	pizzasFavoritasCard.forEach((pizza) => {
-		crearCard(pizza);
-	});
-};
+// const mostrarPizzasFavoritas = () => {
+// 	let pizzasFavoritasCard = JSON.parse(localStorage.getItem("pizzaFavorita"));
+// 	pizzasFavoritasCard.forEach((pizza) => {
+// 		crearCard(pizza);
+// 	});
+// };
 
 // Agregar pizza a favoritos
 const agregarFavorito = (pizza) => {
-	favoritos.push(pizza);
-	carrito.innerHTML = favoritos.length;
-	localStorage.setItem("pizzaFavorita", JSON.stringify(favoritos));
-	alert("Pizza agregada al carrito");
+	if (localStorage.getItem("pizzaFavorita") === null) {
+		favoritos = [];
+		favoritos.push(pizza);
+		localStorage.setItem("pizzaFavorita", JSON.stringify(favoritos));
+		carrito.innerHTML = favoritos.length;
+		alert("Pizza agregada al carrito");
+	} else {
+		favoritos = JSON.parse(localStorage.getItem("pizzaFavorita"));
+		favoritos.push(pizza);
+		localStorage.setItem("pizzaFavorita", JSON.stringify(favoritos));
+		carrito.innerHTML = favoritos.length;
+		alert("Pizza agregada al carrito");
+	}
 };
 
 // Eliminar pizza de favoritos

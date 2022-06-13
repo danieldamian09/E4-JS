@@ -1,0 +1,10 @@
+.back{
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.favorite-container{
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
