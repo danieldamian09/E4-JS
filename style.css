@@ -73,8 +73,7 @@ main {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 	margin: 0 auto;
-	padding: 0 15px;
-	width: 100%;
+	width: 95%;
 }
 
 .card {
