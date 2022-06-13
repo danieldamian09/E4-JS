@@ -2,6 +2,8 @@
 const formulario = document.querySelector("#form-data");
 const idPizza = document.querySelector("#idPizza");
 const container = document.querySelector(".card-container");
+const carrito =  document.querySelector(".amount");
+let favoritos = [];
 
 
 // Data de la pizza
@@ -58,7 +60,57 @@ const pizzas = [
 // Guardar array al localStorage
 window.addEventListener("load", () => {
 	localStorage.setItem("pizzas", JSON.stringify(pizzas));
+	// localStorage.setItem("favoritos", JSON.stringify(favoritos));
+	// Cantidad que esta en el carrito
+	
 });
+
+
+document.addEventListener("DOMContentLoaded", () => {
+	// Obtener las pizzas favoritas 
+	let pizzasFavoritasCart = JSON.parse(localStorage.getItem("pizzaFavorita"));
+	// console.log(pizzasFavoritasCart);
+	if (pizzasFavoritasCart) {
+		carrito.innerHTML = pizzasFavoritasCart.length;
+		mostrarPizzasFavoritas();
+	}else{
+		carrito.innerHTML = 0;
+	}
+
+});
+
+
+// Mostrar las pizzas del carrito guardadas en localStorage
+const mostrarPizzasFavoritas = () => {
+	let pizzasFavoritasCard = JSON.parse(localStorage.getItem("pizzaFavorita"));
+	pizzasFavoritasCard.forEach((pizza) => {
+		crearCard(pizza);
+	});
+}
+
+// Agregar pizza a favoritos
+const agregarFavorito = (pizza) => {
+	favoritos.push(pizza);
+	carrito.innerHTML = favoritos.length;
+	localStorage.setItem("pizzaFavorita", JSON.stringify(favoritos));
+	alert("Pizza agregada al carrito");
+}
+
+// Eliminar pizza de favoritos
+const eliminarFavorito = (pizza) => {
+	let favoritosLocal = JSON.parse(localStorage.getItem("pizzaFavorita"));
+	console.log(favoritosLocal);
+
+	// Filtrar por pizza eliminada
+	let pizzaEliminada = favoritosLocal.filter((elem) => (elem.id !== pizza.id));
+	console.log(pizzaEliminada);
+	carrito.innerHTML = pizzaEliminada.length;
+
+	// Guardar array al localStorage
+	localStorage.setItem("pizzaFavorita", JSON.stringify(pizzaEliminada));
+}
+
+
 
 // Crear Card Pizzas
 const crearCard = (pizza) => {
@@ -76,6 +128,7 @@ const crearCard = (pizza) => {
 	// Agregar el evento para eliminar toda la card
 	img.addEventListener("click", () => {
 		card.remove();
+		eliminarFavorito(pizza);
 	});
 
 	// Crar la imagen de la card
@@ -129,6 +182,11 @@ const crearCard = (pizza) => {
 	cardBtn.classList.add("btn-add");
 	cardBtn.innerHTML = "Agregar Carrito";
 	cardPrecio.appendChild(cardBtn);
+
+	// Agregar el evento al boton
+	cardBtn.addEventListener("click", () => {
+		agregarFavorito(pizza);
+	})
 };
 
 formulario.addEventListener("submit", (e) => {
