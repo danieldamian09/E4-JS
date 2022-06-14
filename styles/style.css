@@ -10,7 +10,7 @@ main {
 			rgb(0 0 0 / 0.6),
 			rgb(0 0 0 / 0.3)
 		),
-		url(./assets/img/fondo.jpg);
+		url(../assets/img/fondo.jpg);
 	background-size: cover;
 	background-position: 15%;
 	width: 100%;

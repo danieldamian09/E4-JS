@@ -1,48 +1,30 @@
-const container = document.querySelector(".favorite-container")
-
-window.addEventListener("load", () => {
-  mostrarPizzasFavoritas();
-});
+import { agregarFavorito } from '../helpers/addFavorites.js';
 
 
-const mostrarPizzasFavoritas = () => {
-	let pizzasFavoritasCard = JSON.parse(localStorage.getItem("pizzaFavorita"));
-	pizzasFavoritasCard.forEach((pizza) => {
-		crearCard(pizza);
-	});
-};
-
-// Eliminar pizza de favoritos
-const eliminarFavorito = (pizza) => {
-	let favoritosLocal = JSON.parse(localStorage.getItem("pizzaFavorita"));
-
-	// Filtrar por pizza eliminada
-	let pizzaEliminada = favoritosLocal.filter((elem) => elem.id !== pizza.id);
-
-	// Guardar array al localStorage
-	localStorage.setItem("pizzaFavorita", JSON.stringify(pizzaEliminada));
-	
-  // Eliminar card
-  const card = document.querySelector(`[data-id="${pizza.id}"]`);
-  card.remove();
-};
-
-const crearCard = (pizza) => {
+// Crear Card Pizzas
+export const crearCard = (pizza, container, carrito) => {
+	// Validar si la pizza ya esta creada
+	let pizzaCreada = document.querySelector(`[data-id="${pizza.id}"]`);
+	if (pizzaCreada) {
+		alert("Pizza ya creada");
+		return;
+	}
 
 	// Crear la card
 	const card = document.createElement("div");
 	card.classList.add("card");
 	card.setAttribute("data-id", pizza.id);
-  container.appendChild(card);
-  
-  	// Crear la imagen cerrar
+	container.appendChild(card);
+
+	// Crear la imagen cerrar
 	const img = document.createElement("img");
 	img.classList.add("close");
 	img.src = "./assets/img/close.png";
 	card.appendChild(img);
 	// Agregar el evento para eliminar toda la card
 	img.addEventListener("click", () => {
-		eliminarFavorito(pizza);
+		card.remove();
+		// eliminarFavorito(pizza);
 	});
 
 	// Crar la imagen de la card
@@ -91,5 +73,14 @@ const crearCard = (pizza) => {
 	cardPrice.innerHTML = `Precio: ${pizza.precio}`;
 	cardPrecio.appendChild(cardPrice);
 
-};
+	// Crear el boton agregar
+	const cardBtn = document.createElement("button");
+	cardBtn.classList.add("btn-add");
+	cardBtn.innerHTML = "Agregar Carrito";
+	cardPrecio.appendChild(cardBtn);
 
+	// Agregar el evento al boton
+	cardBtn.addEventListener("click", () => {
+		agregarFavorito(pizza, carrito);
+	});
+};
