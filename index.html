@@ -12,14 +12,18 @@
 <body>
   <main>
 
-    <div class="cart-container">
-      <div class="circle">
-        <span class="amount"></span>
-        <a href="./cart.html">
-          <img class="cart" src="./assets/img/cart.svg" alt="carrito">
-        </a>
+    <nav>
+      <a href="index.html">Listado de Productos</a>
+      <div class="cart-container">
+        <div class="circle">
+          <span class="amount"></span>
+          <a href="./cart.html">
+            <img class="cart" src="./assets/img/cart.svg" alt="carrito">
+          </a>
+        </div>
       </div>
-    </div>
+    </nav>
+
 
     <h1 class="title">Restaurante Pizzas CABA</h1>
 
@@ -30,7 +34,7 @@
         <h2>Buscar Pizza por ID</h2>
         <form id="form-data" class="form-data">
           <input type="number" class="id-input" name="id" id="idPizza" placeholder="ingrese un id">
-          <input type="search" class="name-input" name="nombre" id="nombre" placeholder="Ingrese nombre">
+          <input type="search" class="name-input" name="nombre" id="namePizza" placeholder="Ingrese nombre">
           <input type="submit" class="send-input" id="consultar" value="Consultar">
         </form>
       </div>

@@ -6,6 +6,7 @@ import { pizzas } from './data/data.js';
 const formulario = document.querySelector("#form-data");
 const idPizza = document.querySelector("#idPizza");
 const container = document.querySelector(".card-container");
+const namePizza = document.querySelector("#namePizza");
 
 // Variables exprtaralas para usar en el evento del boton de agregar a favoritos
 const carrito = document.querySelector(".amount");
@@ -34,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
 formulario.addEventListener("submit", (e) => {
 	e.preventDefault();
 
+
 	// Obtener el array de pizzas del localStorage
 	const pizzasLocalStorage = JSON.parse(localStorage.getItem("pizzas"));
 
@@ -43,23 +45,41 @@ formulario.addEventListener("submit", (e) => {
 		(pizza) => pizza.id == idPizza.value
 	);
 
+	const pizzaByName = pizzasLocalStorage.find(
+		(pizza) => pizza.nombre == namePizza.value
+	);
+
+	
+
 	// Me devuelve un array donde esta la pizza con el id que le paso
 	// const pizzaByID = pizzasLocalStorage.filter((pizza) => pizza.id == idPizza.value);
 
-	// Validaciones
-	if (idPizza.value == "") {
-		alert("Debes ingresar un ID");
+	//Validaciones
+	if (idPizza.value == "" && namePizza.value == "") {
+		alert("Debes llenar por lo menos uno de los campos");
 		return;
 	}
 
-	if (pizzaByID == undefined) {
-		alert("No existe la pizza con el ID ingresado");
-		return;
+	if (pizzaByID == undefined || pizzaByName == undefined) {
+		// alert("No existe la pizza con el ID ingresado");
+		// console.log(pizzaByID, pizzaByName);
+		// return;
+		if (pizzaByID == undefined) {
+			alert(`No existe la pizza con el ID ingresado ${idPizza.value} pero si existe pizza con el nombre ${namePizza.value}`);
+			crearCard(pizzaByName, container, carrito);
+			return;
+		} 
+
+		if (pizzaByName == undefined) {
+			alert(`No existe la pizza con el nombre ingresado ${namePizza.value} pero si existe pizza con el id ${idPizza.value}`);
+			crearCard(pizzaByID, container, carrito);
+			return;
+		} 
 	}
 
-	// Mostrar la pizza en la card
+	//Mostrar la pizza en la card
 	// console.log(pizzaByID);
-	crearCard(pizzaByID, container, carrito);
+	// crearCard(pizzaByID, container, carrito);
 
 	// Limpiar el formulario
 	formulario.reset();
