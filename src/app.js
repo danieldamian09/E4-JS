@@ -2,7 +2,6 @@ import { crearCard } from '../src/components/card.js';
 import { pizzas } from './data/data.js';
 
 
-
 // Variables
 const formulario = document.querySelector("#form-data");
 const idPizza = document.querySelector("#idPizza");
@@ -30,25 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
 		// mostrarPizzasFavoritas();
 	} 
 });
-
-
-
-
-
-// Eliminar pizza de favoritos
-const eliminarFavorito = (pizza) => {
-	let favoritosLocal = JSON.parse(localStorage.getItem("pizzaFavorita"));
-	console.log(favoritosLocal);
-
-	// Filtrar por pizza eliminada
-	let pizzaEliminada = favoritosLocal.filter((elem) => elem.id !== pizza.id);
-	console.log(pizzaEliminada);
-	carrito.innerHTML = pizzaEliminada.length;
-
-	// Guardar array al localStorage
-	localStorage.setItem("pizzaFavorita", JSON.stringify(pizzaEliminada));
-};
-
 
 
 formulario.addEventListener("submit", (e) => {
