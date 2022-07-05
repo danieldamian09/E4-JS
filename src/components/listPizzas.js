@@ -2,11 +2,14 @@
 
 export const crearList = (pizzas) => {
 
-  console.log(pizzas);
+  const contenedor = document.querySelector(".list-pizzas ul");
 
-  // Todo el listado de pizzas del localStorage
+  pizzas.forEach((pizza) => {
+    const item = document.createElement("li");
+    item.textContent = `nombre: ${pizza.nombre} id: ${pizza.id}`;
+    contenedor.appendChild(item);
+  });
 
-
-  // Todo crear un listado con todas las pizzas nombre y ID
+  
 
 }

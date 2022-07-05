@@ -39,9 +39,14 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Evento para mostar un listado de las pizzas referencia para el usuario
-buttonShowList.addEventListener("click", () => {
+buttonShowList.addEventListener("mouseenter", () => {
 	const list = document.querySelector(".list-pizzas");
-	list.classList.toggle("list-hidden");
+	list.classList.add("list-hidden");
+})
+
+document.addEventListener("click", () => {
+	const list = document.querySelector(".list-pizzas");
+	list.classList.remove("list-hidden");
 })
 
 
@@ -62,7 +67,6 @@ formulario.addEventListener("submit", (e) => {
 		(pizza) => pizza.nombre == namePizza.value
 	);
 
-	
 
 	// Me devuelve un array donde esta la pizza con el id que le paso
 	// const pizzaByID = pizzasLocalStorage.filter((pizza) => pizza.id == idPizza.value);

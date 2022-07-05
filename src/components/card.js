@@ -3,6 +3,9 @@ import { agregarFavorito } from '../helpers/addFavorites.js';
 
 // Crear Card Pizzas
 export const crearCard = (pizza, container, carrito) => {
+
+	console.log(pizza);
+
 	// Validar si la pizza ya esta creada
 	let pizzaCreada = document.querySelector(`[data-id="${pizza.id}"]`);
 	if (pizzaCreada) {
