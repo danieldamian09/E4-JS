@@ -1,4 +1,5 @@
 import { crearCard } from '../src/components/card.js';
+import { crearList } from './components/listPizzas.js';
 import { pizzas } from './data/data.js';
 
 
@@ -7,6 +8,7 @@ const formulario = document.querySelector("#form-data");
 const idPizza = document.querySelector("#idPizza");
 const container = document.querySelector(".card-container");
 const namePizza = document.querySelector("#namePizza");
+const buttonShowList = document.querySelector("#buttonShowList");
 
 // Variables exprtaralas para usar en el evento del boton de agregar a favoritos
 const carrito = document.querySelector(".amount");
@@ -22,6 +24,11 @@ window.addEventListener("load", () => {
 
 // Mostar numero de pizzas en el carrito
 document.addEventListener("DOMContentLoaded", () => {
+
+	// Obtener el listado de pizzas para el navbar
+	const listPizzas = JSON.parse(localStorage.getItem("pizzas"));
+	crearList(listPizzas);
+
 	// Obtener las pizzas favoritas
 	let pizzasFavoritasCart = JSON.parse(localStorage.getItem("pizzaFavorita"));
 	// console.log(pizzasFavoritasCart);
@@ -30,6 +37,12 @@ document.addEventListener("DOMContentLoaded", () => {
 		// mostrarPizzasFavoritas();
 	} 
 });
+
+// Evento para mostar un listado de las pizzas referencia para el usuario
+buttonShowList.addEventListener("click", () => {
+	const list = document.querySelector(".list-pizzas");
+	list.classList.toggle("list-hidden");
+})
 
 
 formulario.addEventListener("submit", (e) => {
@@ -83,4 +96,5 @@ formulario.addEventListener("submit", (e) => {
 
 	// Limpiar el formulario
 	formulario.reset();
+
 });
